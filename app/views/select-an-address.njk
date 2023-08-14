@@ -1,0 +1,25 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+
+<form action="/select-an-address" method="post">
+
+{{ govukRadios({
+  name: "address-id",
+  fieldset: {
+    legend: {
+      text: "Where do you live?",
+      isPageHeading: true,
+      classes: "govuk-fieldset__legend--l"
+    }
+  },
+  items: radioButtonItems
+}) }}
+
+{{ govukButton({
+  text: "Continue"
+})}}
+
+</form>
+{% endblock %}

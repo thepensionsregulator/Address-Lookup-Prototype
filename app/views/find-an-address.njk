@@ -1,0 +1,76 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% block pageTitle %}
+Find an address – {{ serviceName }} – GOV.UK Prototype Kit
+{% endblock %}
+
+{% block content %}
+
+<h1 class="govuk-heading-xl">
+  Find an address
+</h1>
+
+{% if errors %}
+
+
+{{ govukErrorSummary({
+  titleText: "There is a problem",
+  errorList: [
+    {
+      text: "Try again or enter your address manually",
+      href: "#postcode"
+    },
+     {
+      text: "Try again or enter your address manually",
+      href: "#building"
+    }
+  ]
+}) }}
+
+{% endif %}
+
+<form action="/find-an-address" method="post">
+
+{{ govukInput({
+  label: {
+  text: "Postcode",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  hint: {
+    text: "For example, AA3 1AB."
+  },
+  errorMessage: {
+    text: "Try again or enter your address manually"
+  },
+  id: "postcode",
+  name: "postcode"
+}) }}
+
+{{ govukInput({
+  label: {
+  text: "Building number or name",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  hint: {
+    text: "For example, 15 or Prospect Cottage."
+  },
+  errorMessage: {
+    text: "Try again or enter your address manually"
+  },
+  id: "building",
+  name: "building"
+}) }}
+
+{{ govukButton({
+  text: "Find address"
+}) }}
+
+</form>
+
+<a href="/manage-prototype/clear-data" class="govuk-link">Clear session</a>.
+
+
+{% endblock %}
