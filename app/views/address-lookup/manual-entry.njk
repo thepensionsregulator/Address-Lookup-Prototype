@@ -1,0 +1,59 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+{% block content %}
+
+<a href="javascript: window.history.go(-1)" class="govuk-back-link">Back</a>
+
+<h1 class="govuk-heading-l">What is your address?</h1>
+
+<form action="/address-lookup/manual-entry" method="post">
+
+{{ govukInput({
+  label: {
+  text: "Address line 1",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  id: "address-line-1",
+  name: "address-line-1"
+}) }}
+
+{{ govukInput({
+  label: {
+  text: "Address line 2",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  id: "address-line-2",
+  name: "address-line-2"
+}) }}
+
+{{ govukInput({
+  label: {
+  text: "Town or city",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  id: "town-or-city",
+  name: "town-or-city"
+}) }}
+
+{{ govukInput({
+  label: {
+  text: "Postcode",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  id: "postcode",
+  name: "postcode"
+}) }}
+
+{{ govukButton({
+  text: "Continue"
+}) }}   
+
+</form>
+
+<p class="govuk-body"><a class="govuk-link" href="/address-lookup/find-an-address">Find an address</a></p>
+
+{% endblock %}

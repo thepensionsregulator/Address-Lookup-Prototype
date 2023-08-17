@@ -1,0 +1,108 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% block content %}
+
+<a href="javascript: window.history.go(-1)" class="govuk-back-link">Back</a>
+
+<h1 class="govuk-heading-xl">
+  Find an address
+</h1>
+
+{% if errors %}
+
+
+{{ govukErrorSummary({
+  titleText: "There is a problem",
+  errorList: [
+    {
+      text: "Try again or enter your address manually",
+      href: "#postcode"
+    },
+     {
+      text: "Try again or enter your address manually",
+      href: "#building"
+    }
+  ]
+}) }}
+
+
+<form action="/address-lookup/find-an-address" method="post">
+
+{{ govukInput({
+  label: {
+  text: "Postcode",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  hint: {
+    text: "For example, BN6 1AF."
+  },
+  errorMessage: {
+    text: "Try again or enter your address manually"
+  },
+  id: "postcode",
+  name: "postcode"
+}) }}
+
+{{ govukInput({
+  label: {
+  text: "Building number or name",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  hint: {
+    text: "For example, 15 or Prospect Cottage."
+  },
+  errorMessage: {
+    text: "Try again or enter your address manually"
+  },
+  id: "building",
+  name: "building"
+}) }}
+
+{% else %}
+
+<form action="/address-lookup/find-an-address" method="post">
+
+{{ govukInput({
+  label: {
+  text: "Postcode",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  hint: {
+    text: "For example, BN6 1AF."
+  },
+  id: "postcode",
+  name: "postcode"
+}) }}
+
+{{ govukInput({
+  label: {
+  text: "Building number or name",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  hint: {
+    text: "For example, 15 or Prospect Cottage."
+  },
+  id: "building",
+  name: "building"
+}) }}
+
+{% endif %}
+
+{{ govukButton({
+  text: "Find address"
+}) }}
+
+</form>
+
+<p class="govuk-body"><a class="govuk-link" href="/address-lookup/mannual-entry">Enter address manually</a></p>
+
+<p class="govuk-body"><a href="/manage-prototype/clear-data" class="govuk-link">Clear session</a></p>
+
+
+
+{% endblock %}

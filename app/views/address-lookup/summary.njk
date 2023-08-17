@@ -1,0 +1,23 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+{% block content %}
+
+<a href="javascript: window.history.go(-1)" class="govuk-back-link">Back</a>
+
+<h1 class="govuk-heading-xl">Summary</h1>
+
+{{ govukSummaryList({
+  rows: [
+    {
+      key: {
+        text: "Address"
+      },
+      value: {
+        text: address
+      }
+    }
+  ]
+}) }}
+
+{% endblock %}
