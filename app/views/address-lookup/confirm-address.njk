@@ -1,0 +1,51 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block content %}
+
+<a href="javascript: window.history.go(-1)" class="govuk-back-link">Back</a>
+
+<h1 class="govuk-heading-xl">Confirm address</h1>
+
+{% set prompt = [noOfAddresses]  %}
+
+{% if noOfAddresses == 1 %}
+{% set result = (prompt.push(" address ")) %}
+{% else %}
+{% set result = (prompt.push(" addresses ")) %}
+{% endif %}
+
+{% set result = (prompt.push("found for <strong>")) %}
+{% if data['postcode'] != '' %}
+{% set result = prompt.push(data['postcode']) %}
+{% set result = prompt.push("</strong>") %}
+{% endif %}
+
+{% if data['postcode'] != '' and data['building'] != '' %}
+{% set result = prompt.push(" and ") %}
+{% set result = prompt.push("<strong>") %}
+{% endif %}
+
+{% if data['building'] != '' %}
+{% set result = prompt.push(data['building']) %}
+{% set result = prompt.push("</strong>.") %}
+{% endif %}
+
+{% if noOfAddresses !== 0 %}
+<p class="govuk-body">{{prompt | join | safe}}</strong>. <a class="govuk-link" href="/address-lookup/find-an-address">Search again</a></p>
+{% endif %}
+
+{{ govukInsetText({
+  text: address
+}) }}
+
+<a class="govuk-button" href="/address-lookup/address-summary">Use this address</a>
+
+{% if noOfAddresses > 1 %}
+<p class="govuk-body"><a class="govuk-link" href="/address-lookup/select-an-address">Use a different address</a></p>
+{% endif%}
+
+<p class="govuk-body"><a class="govuk-link" href="/address-lookup/manual-entry">Enter address manually</a></p>
+
+{% endblock %}

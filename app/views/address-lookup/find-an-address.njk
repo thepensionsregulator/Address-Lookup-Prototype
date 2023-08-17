@@ -1,11 +1,9 @@
 {% extends "govuk-prototype-kit/layouts/unbranded.html" %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 
-{% block pageTitle %}
-Find an address – {{ serviceName }} – GOV.UK Prototype Kit
-{% endblock %}
-
 {% block content %}
+
+<a href="javascript: window.history.go(-1)" class="govuk-back-link">Back</a>
 
 <h1 class="govuk-heading-xl">
   Find an address
@@ -28,9 +26,8 @@ Find an address – {{ serviceName }} – GOV.UK Prototype Kit
   ]
 }) }}
 
-{% endif %}
 
-<form action="/find-an-address" method="post">
+<form action="/address-lookup/find-an-address" method="post">
 
 {{ govukInput({
   label: {
@@ -39,7 +36,7 @@ Find an address – {{ serviceName }} – GOV.UK Prototype Kit
   isPageHeading: false
   },
   hint: {
-    text: "For example, AA3 1AB."
+    text: "For example, BN6 1AF."
   },
   errorMessage: {
     text: "Try again or enter your address manually"
@@ -64,13 +61,48 @@ Find an address – {{ serviceName }} – GOV.UK Prototype Kit
   name: "building"
 }) }}
 
+{% else %}
+
+<form action="/address-lookup/find-an-address" method="post">
+
+{{ govukInput({
+  label: {
+  text: "Postcode",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  hint: {
+    text: "For example, BN6 1AF."
+  },
+  id: "postcode",
+  name: "postcode"
+}) }}
+
+{{ govukInput({
+  label: {
+  text: "Building number or name",
+  classes: "govuk-input--width-20",
+  isPageHeading: false
+  },
+  hint: {
+    text: "For example, 15 or Prospect Cottage."
+  },
+  id: "building",
+  name: "building"
+}) }}
+
+{% endif %}
+
 {{ govukButton({
   text: "Find address"
 }) }}
 
 </form>
 
-<a href="/manage-prototype/clear-data" class="govuk-link">Clear session</a>.
+<p class="govuk-body"><a class="govuk-link" href="/address-lookup/mannual-entry">Enter address manually</a></p>
+
+<p class="govuk-body"><a href="/manage-prototype/clear-data" class="govuk-link">Clear session</a></p>
+
 
 
 {% endblock %}

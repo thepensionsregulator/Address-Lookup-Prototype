@@ -1,0 +1,16 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
+{% block content %}
+
+<a href="javascript: window.history.go(-1)" class="govuk-back-link">Back</a>
+
+<h1 class="govuk-heading-l">No addresses found</h1>
+
+<p>We could not find an address that matches {{postcode}} and {{building}}. You can search again or enter the address manually.</p>
+
+<p class="govuk-body"><a href="/address-lookup/find-an-address">Search again</a></p>
+<p class="govuk-body"><a href="/address-lookup/mannual-entry" class="govuk-link">Enter address manually</a></p>
+
+{% endblock %}

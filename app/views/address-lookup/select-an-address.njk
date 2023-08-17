@@ -1,0 +1,52 @@
+{% extends "govuk-prototype-kit/layouts/unbranded.html" %}
+{% from "govuk/components/radios/macro.njk" import govukRadios %}
+
+{% block content %}
+
+<a href="javascript: window.history.go(-1)" class="govuk-back-link">Back</a>
+
+<h1 class="govuk-heading-xl">Select address</h1>
+
+{% set prompt = [addresses.length]  %}
+
+{% if addresses.length == 1 %}
+{% set result = (prompt.push(" address ")) %}
+{% else %}
+{% set result = (prompt.push(" addresses ")) %}
+{% endif %}
+
+{% set result = (prompt.push("found for <strong>")) %}
+{% if data['postcode'] != '' %}
+{% set result = prompt.push(data['postcode']) %}
+{% set result = prompt.push("</strong>") %}
+{% endif %}
+
+{% if data['postcode'] != '' and data['building'] != '' %}
+{% set result = prompt.push(" and ") %}
+{% set result = prompt.push("<strong>") %}
+{% endif %}
+
+{% if data['building'] != '' %}
+{% set result = prompt.push(data['building']) %}
+{% set result = prompt.push("</strong>.") %}
+{% endif %}
+
+
+<form action="/address-lookup/select-an-address" method="post">
+
+<p clas="govuk-body">{{ prompt | join | safe}} <a href="/address-lookup/find-an-address">Search again</a></p>
+{{ 
+  govukRadios({
+  name: "address-id", 
+  items: addresses
+}) }}
+
+{{ govukButton({
+  text: "Use this address"
+})}}
+
+</form>
+
+<p class="govuk-body"><a class="govuk-link" href="/address-lookup/mannual-entry">Enter address manually</a></p>
+
+{% endblock %}
