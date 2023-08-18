@@ -1,3 +1,4 @@
+{% from "govuk/components/button/macro.njk" import govukButton %}
 {% extends "layouts/main.html" %}
 
 {% set pageName="Home" %}
@@ -12,6 +13,13 @@
     <h1 class="govuk-heading-xl">
       {{ serviceName }}
     </h1>
+
+
+    {{ govukButton({
+    text: "Start now",
+    href: "/address-lookup/find-an-address",
+    isStartButton: true
+    }) }}
 
     {% include "govuk-prototype-kit/includes/homepage-bottom.njk" %}
   </div>
