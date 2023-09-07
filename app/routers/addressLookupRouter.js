@@ -8,12 +8,12 @@ addressLookupRouter.route('/find-an-address')
         req.session.destroy();
         res.render("address-lookup/find-an-address.njk");
     })
-    .post((req, res) => {
+    .post(async (req, res) => {
         if(req.session.data['postcode'] == '' && req.session.data['building'] == ''){
             res.render("address-lookup/find-an-address.njk", {errors : true});
         }
 
-        const addresses = addressLookupOs(req.session.data['postcode'], req.session.data['building']);
+        const addresses = await addressLookupOs(req.session.data['postcode'], req.session.data['building']);
 
         if (addresses.length == 0){
             res.redirect("not-found");
@@ -55,8 +55,8 @@ addressLookupRouter.route('/confirm-address')
     })
     
 addressLookupRouter.route('/select-an-address')
-    .get((req, res) => {
-        let addresses = addressLookupOs(req.session.data['postcode'], req.session.data['building']);
+    .get(async (req, res) => {
+        let addresses = await addressLookupOs(req.session.data['postcode'], req.session.data['building']);
         addresses = addresses.map(address => ({value: address.id, text: address.address}));
         
         res.render("address-lookup/select-an-address.njk", {postcode: req.session.data["postcode"], building: req.session.data["building"], addresses});
