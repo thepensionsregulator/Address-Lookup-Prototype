@@ -7,6 +7,7 @@
   "dependencies": {
     "@govuk-prototype-kit/common-templates": "1.2.1",
     "axios": "^1.4.0",
+    "bent": "^7.3.12",
     "govuk-frontend": "4.7.0",
     "govuk-prototype-kit": "13.12.0"
   }
